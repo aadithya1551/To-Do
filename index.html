@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="output.css">
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+      }
+
+      :root {
+         --bg-color: hsl(0, 0%, 98%);
+         --lbg-color: hsl(236, 33%, 92%);
+         --light-color: hsl(236, 9%, 61%);
+         --dark-color: hsl(235, 19%, 35%);
+         --through-color: hsl(233, 11%, 84%);
+         --border-color: hsl(233, 11%, 84%);
+      }
+
+      .dark-theme {
+         --bg-color: hsl(235, 24%, 19%);
+         --lbg-color: hsl(235, 21%, 11%);
+         --light-color: hsl(233, 14%, 35%);
+         --dark-color: hsl(234, 39%, 85%);
+         --through-color: hsl(234, 11%, 52%);
+         --border-color: hsl(234, 11%, 52%);
+      }
+
+      body {
+         background-image: url("images/bg-desktop-light.jpg");
+         background-color: var(--lbg-color);
+         background-repeat: no-repeat;
+         text-align: center;
+         display: flex;
+         height: 90vh;
+         justify-content: center;
+         margin-top: 50px;
+      }
+
+      input[type="checkbox"] {
+         appearance: none;
+         border: 1px solid gray;
+         height: 15px;
+         width: 15px;
+         border-radius: 10px;
+         cursor: pointer;
+      }
+
+      #in {
+         background-color: var(--bg-color);
+      }
+
+
+      #work {
+         width: 400px;
+         background-color: var(--bg-color);
+         color: var(--dark-color);
+      }
+
+      #work:focus {
+         outline: gray;
+      }
+
+      li:hover {
+         cursor: pointer;
+         color: blue;
+      }
+
+
+      #show {
+         height: 200px;
+         overflow: auto;
+         background-color: var(--bg-color);
+      }
+
+
+      #show div {
+         background-color: var(--bg-color);
+         color: var(--dark-color);
+         width: inherit;
+         padding: 10px;
+         border-bottom: 1px solid;
+         border-bottom-color: var(--border-color);
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         gap: 5px;
+         border-top-left-radius: 4px;
+         border-top-right-radius: 4px;
+      }
+
+      #show input,
+      p,
+      img {
+         margin: 0px 10px;
+         align-items: flex-start;
+      }
+
+
+      #show p {
+         width: 400px;
+         overflow: hidden;
+         text-align: left;
+      }
+
+      #show input:focus {
+         background-image: linear-gradient(to right, blue, violet);
+      }
+
+      #show img:hover {
+         cursor: pointer;
+      }
+
+      #icon{
+         transition: transform 0.60s;
+         transition-timing-function: ease;
+      }
+
+      #icon:active{
+        transform: rotate(360deg);
+      }
+
+     
+
+      #footer {
+         border-top: 1px solid;
+         border-top-color: var(--border-color);
+         color: var(--light-color);
+         background-color: var(--bg-color);
+      }
+
+      #filter {
+         color: var(--dark-color);
+         background-color: var(--bg-color);
+      }
+
+      .dd {
+         color: var(--light-color);
+      }
+
+      @media only screen and (max-width:600px) {
+         body {
+            background-image: url("images/bg-mobile-light.jpg");
+            margin-top: -70px;
+            height: auto;
+         }
+
+         #show div {
+            font-size: 14px;
+            background-color: var(--bg-color);
+            width: inherit;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 2px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+         }
+
+         #show p {
+            width: inherit;
+         }
+
+         #work {
+            width: 200px;
+         }
+
+         #show p {
+            width: inherit;
+            overflow: hidden;
+            text-align: left;
+         }
+
+         
+      }
+   </style>
+
+</head>
+
+<body>
+
+   <div class="w-[500px]  flex flex-col gap-7 max-sm:p-28"> <!--Main container-->
+
+      <div class="flex justify-between">
+         <h1 class="text-3xl text-white font-bold">T O D O</h1>
+         <img src="images/icon-moon.svg" width="30px" height="30px" id="icon"
+            class="object-contain hover:cursor-pointer" alt="">
+      </div>
+
+      <div id="in" class=" rounded-[4px] p-3 flex justify-start place-items-center gap-3">
+         <input type="checkbox" id="checkbox" onclick="start()" />
+         <input type="text" id="work" placeholder="Create a new todo.." />
+      </div>
+
+      <!-- SHOWING AREA -->
+      <div id="main">
+         <div id="show" class="rounded-t-[4px] shadow-lg justify-start place-items-center gap-3 w-full h-fit">
+
+         </div>
+
+         <div id="footer"
+            class=" rounded-b-[4px]  flex place-items-center justify-between p-2  max-sm:text-[12px] max-sm:relative shadow-lg">
+            <div>
+               <p id="count" class="hover:cursor-pointer hover:text-blue-700"> Items left</p>
+            </div>
+
+            <div id="filter"
+               class="max-sm:absolute top-16 max-sm:left-2 p-3 rounded-[4px] max-sm:shadow-lg max-sm:px-[48px]">
+               <ul class="flex gap-4">
+                  <li id="all">All</li>
+                  <li id="act">Active</li>
+                  <li id="com">Completed</li>
+               </ul>
+            </div>
+
+            <div>
+               <p class="hover:cursor-pointer hover:text-blue-700" id="clear">Clear Completed</p>
+            </div>
+         </div>
+      </div>
+      <p class="dd max-sm:relative top-20 max-sm:text-[14px]">Drag and Drop to reorder list</p>
+   </div>
+
+
+
+
+   <!-- JAVASCRIPT -->
+   <script>
+
+      let icon = document.getElementById("icon");
+      icon.onclick = function () {
+         document.body.classList.toggle("dark-theme");
+         if (document.body.classList.contains("dark-theme")) {
+            icon.src = "images/icon-sun.svg"
+         }
+         else {
+            icon.src = "images/icon-moon.svg"
+         }
+      }
+
+
+      function create(a) {
+         let check = document.createElement("input");
+         check.type = "checkbox";
+         let p = document.createElement("p");
+         p.innerHTML = a;
+         let img = document.createElement("img");
+         img.src = "images/icon-cross.svg"
+         let container = document.createElement("div");
+         let val = document.getElementById("work").value = ""
+         container.appendChild(check);
+         container.appendChild(p);
+         container.appendChild(img);
+         let main_container = document.getElementById("show");
+         main_container.appendChild(container);
+         let count = document.getElementById('count');
+         count.innerHTML = main_container.childElementCount + " Items Left"
+         check.addEventListener("click", done)
+         img.addEventListener("click", remove)
+         function done() {
+            p.style.textDecoration = "line-through"
+            p.style.color = "var(--through-color)"
+            count.innerHTML = (main_container.childElementCount) - 1 + " Items Left"
+         }
+
+         function remove() {
+            main_container.removeChild(container);
+            count.innerHTML = (main_container.childElementCount) + " Items Left"
+         }
+
+         let active = document.getElementById("act");
+         let Completed = document.getElementById("com");
+         let all = document.getElementById("all")
+         let clear = document.getElementById("clear")
+         all.addEventListener("click", al)
+         Completed.addEventListener("click", com)
+         active.addEventListener("click", act);
+         clear.addEventListener("click", cc)
+
+         function act() {
+            main_container.appendChild(container)
+            if (check.checked == true) {
+               main_container.removeChild(check.parentElement)
+            }
+         }
+
+         function com() {
+            main_container.appendChild(container)
+            if (check.checked == false) {
+               main_container.removeChild(check.parentElement)
+            }
+         }
+
+         function al() {
+            main_container.appendChild(container);
+         }
+
+         function cc() {
+            main_container.appendChild(container)
+            if (check.checked == true) {
+               main_container.removeChild(check.parentElement)
+            }
+            else {
+               let a = check.parentElement
+            }
+            main_container.appendChild(a)
+         }
+
+      }
+
+
+
+      function start() {
+         // let checkbox=document.getElementById("checkbox").style.backgroundColor="red";
+         let task = document.getElementById("work").value;
+         create(task)
+      }
+
+
+
+   </script>
+
+</body>
+
+</html>
+
+
+
